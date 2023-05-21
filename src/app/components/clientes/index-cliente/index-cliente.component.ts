@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {ClienteService} from "../../../services/cliente.service";
+import { Component, OnInit } from '@angular/core';
+import { ClienteService } from '../../../services/cliente.service';
+import { AdminService } from '../../../services/admin.service';
 
 @Component({
   selector: 'app-index-cliente',
@@ -7,8 +8,12 @@ import {ClienteService} from "../../../services/cliente.service";
   styleUrls: ['./index-cliente.component.scss']
 })
 export class IndexClienteComponent implements OnInit {
-	constructor( private readonly _clienteService: ClienteService ) { }
+	constructor( private readonly _clienteService: ClienteService,
+	             private readonly _adminService: AdminService ) {
+		this.token = _adminService.getToken() ?? ''
+	}
 
+	public token = ''
 	public clientes: any[] = []
 	public filtroApellidos = ''
 	public filtroCorreo = ''
@@ -20,7 +25,7 @@ export class IndexClienteComponent implements OnInit {
 	}
 
 	private initData() {
-		this._clienteService.listar_clientes_filtro_admin(null, null).subscribe(
+		this._clienteService.listar_clientes_filtro_admin(null, null, this.token).subscribe(
 			response => {
 				this.clientes = response.data
 			},
@@ -36,7 +41,7 @@ export class IndexClienteComponent implements OnInit {
 		else if(tipo == 'correo') filtro = this.filtroCorreo
 
 		if(filtro) {
-			this._clienteService.listar_clientes_filtro_admin(tipo, filtro).subscribe(
+			this._clienteService.listar_clientes_filtro_admin(tipo, filtro, this.token).subscribe(
 				response => {
 					this.clientes = response.data
 				},
