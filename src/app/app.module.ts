@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { IndexClienteComponent } from './components/clientes/index-cliente/index-cliente.component';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
     LoginComponent,
     ClientesComponent,
     IndexClienteComponent,
+    CreateClienteComponent,
   ],
   imports: [
     BrowserModule,
